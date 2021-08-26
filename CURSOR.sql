@@ -1,17 +1,21 @@
 BEGIN
-  CREATE TABLE tbproducts (
-                          nidproduct NUMBER(2) NOT NULL,
-                          vdescription VARCHAR2(20 CHAR),
-                          nquantity NUMBER(3),
-                          nprice NUMBER(6,2),
-                          dlastdate DATE);
+  CREATE TABLE tbproductos (
+                          nidproducto NUMBER(2) NOT NULL,
+                          vdesproducto VARCHAR2(20 CHAR),
+                          nunidades NUMBER(3),
+                          npreciounitario NUMBER(6,2),
+                          dfechaalta DATE,
+                          dfechavenc DATE);
 END;
 /
 
 BEGIN
-  INSERT INTO tbproducts (nidproduct,vdescription,nquantity,nprice,dlastdate) VALUES (1,'Hammer', 50,3.25,TO_DATE('13-MAY-2021','DD-MON-YYYY'));
-  INSERT INTO tbproducts (nidproduct,vdescription,nquantity,nprice,dlastdate) VALUES (2, 'Nails',100,0.75,TO_DATE('28-AUG-2021','DD-MON-YYYY'));
-  INSERT INTO tbproducts (nidproduct,vdescription,nquantity,nprice,dlastdate) VALUES (3,'Screws',250,0.16,TO_DATE('21-JUL-2021','DD-MON-YYYY'));  
+  INSERT INTO tbproductos (nidproducto,vdesproducto,nunidades,npreciounitario,dfechaalta,dfechavenc) 
+    VALUES (1,'Hammer', 50,3.25,TO_DATE('13-MAY-2021','DD-MON-YYYY'),TO_DATE('20-AUG-2021','DD-MON-YYYY'));
+  INSERT INTO tbproductos (nidproducto,vdesproducto,nunidades,npreciounitario,dfechaalta,dfechavenc) 
+    VALUES (2,'Nails',100,1.34,TO_DATE('08-JUN-2021','DD-MON-YYYY'),TO_DATE('10-OCT-2021','DD-MON-YYYY'));  
+  INSERT INTO tbproductos (nidproducto,vdesproducto,nunidades,npreciounitario,dfechaalta,dfechavenc) 
+    VALUES (3,'Screws',250,0.16,TO_DATE('21-JUL-2021','DD-MON-YYYY'),TO_DATE('03-JUL-2021','DD-MON-YYYY'));  
 END
 /
 
