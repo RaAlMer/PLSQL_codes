@@ -17,6 +17,28 @@ ALTER TABLE tbproductos
     ADD bactivo VARCHAR2(20 CHAR)
     ;
 
+--- Imprime en pantalla si está vencido el producto o no
+DECLARE 
+    
+    bAlta VARCHAR2 (20 CHAR);
+    
+BEGIN
+    
+    SELECT(
+            CASE WHEN SYSDATE > dfechavenc THEN 'FALSE' ELSE 'TRUE' END
+            )
+    INTO bAlta
+    FROM tbproductos t
+    WHERE t.nidproducto = 1
+   ;
+    
+    DBMS_OUTPUT.PUT_LINE('El producto esta vencido: ' || bAlta);
+    
+END;
+/
+
+--- Actualiza el valor de la columna de si los productos están vencidos o no
+
 UPDATE tbproductos t
 SET t.bactivo = 
     (SELECT
