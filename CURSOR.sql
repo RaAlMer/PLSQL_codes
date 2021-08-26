@@ -11,7 +11,7 @@ END;
 
 BEGIN
   INSERT INTO tbproductos (nidproducto,vdesproducto,nunidades,npreciounitario,dfechaalta,dfechavenc) 
-    VALUES (1,'Hammer', 50,3.25,TO_DATE('13-MAY-2021','DD-MON-YYYY'),TO_DATE('20-AUG-2021','DD-MON-YYYY'));
+    VALUES (1,'Hammer',50,3.25,TO_DATE('13-MAY-2021','DD-MON-YYYY'),TO_DATE('20-AUG-2021','DD-MON-YYYY'));
   INSERT INTO tbproductos (nidproducto,vdesproducto,nunidades,npreciounitario,dfechaalta,dfechavenc) 
     VALUES (2,'Nails',100,1.34,TO_DATE('08-JUN-2021','DD-MON-YYYY'),TO_DATE('10-OCT-2021','DD-MON-YYYY'));  
   INSERT INTO tbproductos (nidproducto,vdesproducto,nunidades,npreciounitario,dfechaalta,dfechavenc) 
@@ -27,14 +27,14 @@ DECLARE
 
 BEGIN
 
-  FOR r IN c_producto LOOP
+  FOR r_producto IN c_producto LOOP
     IF SYSDATE > r.dfechavenc THEN
-        dbms_output.put_line('Producto '||r.vdesproducto ||' con su estado: FALSE');
+        dbms_output.put_line('Producto '||r_producto.vdesproducto ||' con su estado: FALSE');
     ELSE
-        dbms_output.put_line('Producto '||r.vdesproducto ||' con su estado: TRUE');
+        dbms_output.put_line('Producto '||r_producto.vdesproducto ||' con su estado: TRUE');
     END IF;
     IF r.dfechavenc < SYSDATE THEN
-      dbms_output.put_line('Producto '||r.vdesproducto ||' ha caducado !');
+      dbms_output.put_line('Producto '||r_producto.vdesproducto ||' ha caducado !');
     END IF;
   END LOOP;
 
