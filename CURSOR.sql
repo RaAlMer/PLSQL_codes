@@ -28,12 +28,12 @@ DECLARE
 BEGIN
 
   FOR r_producto IN c_producto LOOP
-    IF SYSDATE > r.dfechavenc THEN
+    IF SYSDATE > r_producto.dfechavenc THEN
         dbms_output.put_line('Producto '||r_producto.vdesproducto ||' con su estado: FALSE');
     ELSE
         dbms_output.put_line('Producto '||r_producto.vdesproducto ||' con su estado: TRUE');
     END IF;
-    IF r.dfechavenc < SYSDATE THEN
+    IF r_producto.dfechavenc < SYSDATE THEN
       dbms_output.put_line('Producto '||r_producto.vdesproducto ||' ha caducado !');
     END IF;
   END LOOP;
