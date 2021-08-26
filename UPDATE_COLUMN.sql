@@ -23,3 +23,14 @@ SET t.bactivo =
         CASE WHEN SYSDATE > st.dfechavenc THEN 'FALSE' ELSE 'TRUE' END
         FROM tbproductos st
         WHERE st.nidproducto = t.nidproducto);
+
+--- Actualiza el precio de los productos cuyo campo bactive sea TRUE
+UPDATE tbproductos t
+SET t.npreciounitario = 
+                    (SELECT
+                    CASE
+                        WHEN st.bactivo = 'FALSE' THEN st.npreciounitario 
+                        WHEN st.bactivo = 'TRUE'  THEN st.npreciounitario*1.1
+                        END
+                    FROM tbproductos st
+                    WHERE st.nidproducto = t.nidproducto);
