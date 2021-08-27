@@ -1,4 +1,3 @@
--- Tabla donde están los productos
 CREATE TABLE tbproductos (
                         nidproducto NUMBER(2) NOT NULL,
                         vdesproducto VARCHAR2(20 CHAR),
