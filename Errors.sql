@@ -1,4 +1,4 @@
---- Tabla donde están los productos
+--- Tabla donde están los productos---
 CREATE TABLE tbproductos (
                         nidproducto NUMBER(2) NOT NULL,
                         vdesproducto VARCHAR2(20 CHAR),
@@ -15,7 +15,7 @@ INSERT INTO tbproductos (nidproducto,vdesproducto,nunidades,npreciounitario,dfec
 INSERT INTO tbproductos (nidproducto,vdesproducto,nunidades,npreciounitario,dfechaalta,dfechavenc) 
   VALUES (3,'Screws',250,0.16,TO_DATE('21-JUL-2021','DD-MON-YYYY'),TO_DATE('03-JUL-2021','DD-MON-YYYY'));
   
---- Tabla donde guardar los errores
+--- Tabla donde guardar los errores---
 CREATE TABLE tbLog(
                     n_ercode NUMBER(10), --Código del error
                     v_erdesc VARCHAR2(1024 CHAR) --Descripción del error
