@@ -15,6 +15,11 @@ DECLARE
     vd_fecha_entrega    DATE; 
     vv_localildad       VARCHAR2(20 CHAR); -- Recibimos un valor nulo
 BEGIN
+    DECLARE
+        -- Las variables declaradas con el mismo nombre dentro del bloque hijo sustituyen a las del bloque padre si luego todas las sentencias están dentro del bloque hijo
+        -- En este caso, están dentro del BEGIN-END del bloque hijo
+        -- No obstante, si luego las sentencias se encuentran dentro del bloque padre, la variable con el mismo nombre no será sustituida por la del bloque hijo
+    
     BEGIN 
         -- Carga del fichero del proveedor
         
