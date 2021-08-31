@@ -62,3 +62,43 @@ EXCEPTION
     RAISE;
 END;
 /
+
+-- Un bloque anónimo para disparar los errores
+DECLARE 
+    v_mi_variable   TBPRODUCTOS%ROWTYPE; 
+    v_mi_idvar      TBPRODUCTOS.NIDPRODUCTO%TYPE; 
+    ex_mi_error     EXCEPTION;
+    v_code NUMBER; --Variable donde se guarda el código del error
+    v_errm VARCHAR2(1024); --Variable donde se guarda el mensaje del error
+     
+BEGIN 
+    BEGIN 
+        INSERT INTO tbproductos(nidproducto, vdesproducto, nunidades) 
+            VALUES (1, 'Martillo de guerra', 20000) 
+            ; 
+    EXCEPTION 
+        WHEN OTHERS THEN
+            log_error (
+                'Mi error', --Título del error
+                'Información' --Información en la tabla del error
+            );
+       
+            RAISE;
+    END; 
+     
+    BEGIN 
+        SELECT * 
+            INTO v_mi_variable 
+            FROM tbproductos 
+            ; 
+    EXCEPTION 
+        WHEN OTHERS THEN
+            log_error (
+                'Mi error', --Título del error
+                'Información' --Información en la tabla del error
+            );
+       
+            RAISE;
+    END; 
+     
+END;
