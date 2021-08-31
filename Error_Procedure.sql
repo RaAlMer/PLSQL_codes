@@ -6,7 +6,7 @@ CREATE TABLE error_log
   info            CLOB,
   created_on      DATE DEFAULT SYSDATE,
   created_by      VARCHAR2 (100 CHAR),
-  callstack       CLOB
+  callstack       CLOB,
   errorstack      CLOB,
   errorbacktrace  CLOB
  )
