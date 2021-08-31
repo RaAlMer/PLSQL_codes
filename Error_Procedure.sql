@@ -80,10 +80,8 @@ BEGIN
         WHEN OTHERS THEN
             log_error (
                 'Mi error', --Título del error
-                'Información' --Información en la tabla del error
+                'Información del error' --Información en la tabla del error
             );
-       
-            RAISE;
     END; 
      
     BEGIN 
@@ -95,7 +93,7 @@ BEGIN
         WHEN OTHERS THEN
             log_error (
                 'Mi error', --Título del error
-                'Información' --Información en la tabla del error
+                'Información del error' --Información en la tabla del error
             );
        
             RAISE;
