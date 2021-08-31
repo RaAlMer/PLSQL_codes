@@ -13,8 +13,8 @@ CREATE TABLE error_log
  /
  
  -- Procedimiento para manejar el error
- CREATE OR REPLACE PROCEDURE log_error (title_in    IN error_log.title%TYPE,
-                                        info_in     IN error_log.info%TYPE)
+ CREATE OR REPLACE PROCEDURE pr_log_error (title_in    IN error_log.title%TYPE,
+                                           info_in     IN error_log.info%TYPE)
   
   AUTHID DEFINER
 IS
@@ -37,7 +37,7 @@ END;
 /
 
 -- Mi procedimiento para probar
-CREATE OR REPLACE PROCEDURE my_procedure (value_in IN INTEGER)
+CREATE OR REPLACE PROCEDURE pr_my_procedure (value_in IN INTEGER)
   AUTHID DEFINER
 IS
   l_local_variable  DATE;
@@ -52,7 +52,7 @@ BEGIN
 EXCEPTION
   WHEN OTHERS
   THEN
-    log_error (
+    pr_log_error (
       'my_procedure failed',
         'value_in = '
        || value_in
@@ -78,7 +78,7 @@ BEGIN
             ; 
     EXCEPTION 
         WHEN OTHERS THEN
-            log_error (
+            pr_log_error (
                 'Mi error', --Título del error
                 'Información del error' --Información en la tabla del error
             );
@@ -91,7 +91,7 @@ BEGIN
             ; 
     EXCEPTION 
         WHEN OTHERS THEN
-            log_error (
+            pr_log_error (
                 'Mi error', --Título del error
                 'Información del error' --Información en la tabla del error
             );
