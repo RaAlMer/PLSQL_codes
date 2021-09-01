@@ -106,3 +106,12 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('Ya existe un proveedor con el nombre que intenta registrar.');
         
 END pr_alta_proveedor;
+
+-- Llamamos al procedimiento
+DECLARE
+    vn_idproveedor  NUMBER; -- El id del proveedor nos lo dará el procedimiento automaticamente
+    vd_fecha        DATE := SYSDATE; -- Le damos la fecha del sistema
+BEGIN
+    pr_alta_proveedor(vn_idproveedor, 'Martillos La Forja', vd_fecha); -- Si aquí el nombre del proveedor ya existía en la table, entonces nos lanzará nuestro error
+    DBMS_OUTPUT.PUT_LINE(vn_idproveedor); -- Mostramos en pantalla el id del proveedor que nos da el procedimiento ya que no lo conocemos
+END;
