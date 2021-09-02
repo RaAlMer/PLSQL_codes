@@ -16,3 +16,7 @@ INSERT INTO tb_productos
     VALUES (2, 'Martillo', 10, 34.75, SYSDATE, TO_DATE('15/09/2021', 'DD/MM/YYYY'), 'Madrid');
 INSERT INTO tb_productos 
     VALUES (3, 'Clavo', 300, 0.45, SYSDATE, TO_DATE('29/08/2021', 'DD/MM/YYYY'), 'Las Palmas');
+
+-- Añade el campo porcentaje para conocer si ha aumentado el precio o disminuido
+ALTER TABLE tb_productos
+ADD n_porcentaje NUMBER(4,2);
