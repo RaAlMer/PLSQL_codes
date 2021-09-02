@@ -22,3 +22,23 @@ ALTER TABLE tb_productos
 ADD (b_activo     VARCHAR2(20 CHAR),
      n_porcentaje NUMBER(4,2));
 
+-- Procedimiento que actualiza si los productos están vencidos o no
+CREATE OR REPLACE PROCEDURE pr_actualizar_estado
+
+IS
+    
+BEGIN
+    UPDATE tb_productos t
+    SET t.b_activo = 
+        (SELECT
+            CASE WHEN SYSDATE > st.d_fechavenc THEN 'FALSE' ELSE 'TRUE' END -- Devuelve TRUE si el producto sigue activo y FALSE si está vencido
+            FROM tb_productos st
+            WHERE st.n_idproducto = t.n_idproducto);
+
+END pr_actualizar_estado;
+/
+
+-- Llamamos al procedimiento
+BEGIN
+    pr_actualizar_estado;
+END;
