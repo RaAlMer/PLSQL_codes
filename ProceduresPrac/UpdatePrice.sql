@@ -20,7 +20,7 @@ INSERT INTO tb_productos
 -- Añade el campo activo y porcentaje para conocer si el producto ha vencido o si ha aumentado el precio o disminuido
 ALTER TABLE tb_productos
 ADD (b_activo     VARCHAR2(20 CHAR),
-     n_porcentaje NUMBER(4,2));
+     n_porcentaje NUMBER(10,2));
 
 -- Procedimiento que actualiza si los productos están vencidos o no
 CREATE OR REPLACE PROCEDURE pr_actualizar_estado
