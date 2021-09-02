@@ -42,3 +42,70 @@ END pr_actualizar_estado;
 BEGIN
     pr_actualizar_estado;
 END;
+/
+
+-- Procedimiento para actualizar los precios
+CREATE OR REPLACE PROCEDURE pr_actualizar_precios_proveedor (pi_n_idproducto           IN         TB_PRODUCTOS.N_IDPRODUCTO%TYPE,
+                                                             pio_n_precioud            IN OUT     TB_PRODUCTOS.N_PRECIOUD%TYPE,
+                                                             po_n_porcentajecambio     OUT        TB_PRODUCTOS.N_PORCENTAJE%TYPE)
+IS  
+    vn_idproducto   TB_PRODUCTOS.N_IDPRODUCTO%TYPE;
+    vn_porcentaje   TB_PRODUCTOS.N_PORCENTAJE%TYPE;
+    vn_precioud     TB_PRODUCTOS.N_PRECIOUD%TYPE;
+    ex_sinid        EXCEPTION;
+    ex_sinprecio    EXCEPTION;
+    
+BEGIN
+    vn_idproducto  := NVL(pi_n_idproducto, -1);
+    pio_n_precioud := NVL(pio_n_precioud, -1);
+    
+    IF pio_n_precioud = -1 THEN
+        RAISE ex_sinprecio;
+    ELSIF vn_idproducto = -1 THEN
+        RAISE ex_sinid;
+    END IF;
+    
+    BEGIN
+        SELECT n_precioud
+         INTO vn_precioud
+         FROM tb_productos
+         WHERE n_idproducto = vn_idproducto;
+    END;
+    BEGIN
+        vn_porcentaje := (pio_n_precioud/vn_precioud)*100;
+    END;
+    
+    BEGIN
+        UPDATE tb_productos t
+         SET t.n_precioud = 
+                        (SELECT
+                        CASE
+                            WHEN st.b_activo = 'FALSE' THEN st.n_precioud
+                            WHEN st.b_activo = 'TRUE'  THEN pio_n_precioud
+                            END
+                        FROM tb_productos st
+                        WHERE st.n_idproducto = vn_idproducto);
+    END;
+    
+    BEGIN
+        UPDATE tb_productos
+            SET n_porcentaje = vn_porcentaje
+            WHERE n_idproducto = vn_idproducto;
+    END;
+    
+EXCEPTION
+    WHEN ex_sinprecio THEN
+        DBMS_OUTPUT.PUT_LINE('No se introdujo nuevo precio.');
+    WHEN ex_sinid THEN
+        DBMS_OUTPUT.PUT_LINE('No se introdujo ID.');
+        
+END pr_actualizar_precios_proveedor;
+/
+-- Llamamos al procedimiento
+DECLARE
+    vn_id           NUMBER := 1;
+    vn_porcentaje   NUMBER;
+    vn_precioud     NUMBER := 4.5;
+BEGIN
+    pr_actualizar_precios_proveedor(vn_id, vn_precioud, vn_porcentaje);
+END;
