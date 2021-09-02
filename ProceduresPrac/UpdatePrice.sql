@@ -84,7 +84,8 @@ BEGIN
                             WHEN st.b_activo = 'TRUE'  THEN pio_n_precioud
                             END
                         FROM tb_productos st
-                        WHERE st.n_idproducto = vn_idproducto);
+                        WHERE st.n_idproducto = vn_idproducto)
+        WHERE t.n_idproducto = vn_idproducto;
     END;
     
     BEGIN
