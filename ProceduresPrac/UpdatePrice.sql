@@ -47,7 +47,8 @@ END;
 -- Procedimiento para actualizar los precios
 CREATE OR REPLACE PROCEDURE pr_actualizar_precios_proveedor (pi_n_idproducto           IN         TB_PRODUCTOS.N_IDPRODUCTO%TYPE, --Se introduce el ID del producto
                                                              pio_n_precioud            IN OUT     TB_PRODUCTOS.N_PRECIOUD%TYPE,   --Se introduce el nuevo precio
-                                                             po_n_porcentajecambio     OUT        TB_PRODUCTOS.N_PORCENTAJE%TYPE) --Sale el porcentaje (nuevo precio/antiguo precio)
+                                                             po_n_porcentajecambio     OUT        TB_PRODUCTOS.N_PORCENTAJE%TYPE) --Sale el porcentaje 
+                                                                                                                                  --(nuevo precio/antiguo precio)
 IS  
     vn_idproducto   TB_PRODUCTOS.N_IDPRODUCTO%TYPE; --Variable para guardar el ID del producto
     vn_precioud     TB_PRODUCTOS.N_PRECIOUD%TYPE;   --Variable para guardar el antiguo precio
