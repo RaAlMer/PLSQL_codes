@@ -32,9 +32,9 @@ END;
 CREATE OR REPLACE PROCEDURE pr_generar_fichero_productos (pi_v_cadena   IN  VARCHAR2) 
 IS  
     vv_texto            VARCHAR2(100 CHAR);
-    vv_producto         VARCHAR2(14 CHAR); 
-    vn_unidades         NUMBER(2); 
-    vn_precio           NUMBER(3,2); 
+    vv_producto         VARCHAR2(20 CHAR); 
+    vn_unidades         NUMBER(3); 
+    vn_precio           NUMBER(6,2); 
     vd_fecha_entrega    DATE; 
     vv_localildad       VARCHAR2(20 CHAR);
     
