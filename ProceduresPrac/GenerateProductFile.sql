@@ -1,11 +1,11 @@
 -- Procedimiento que carga una cadena como si fuera un producto
-CREATE OR REPLACE PROCEDURE pr_cargar_fichero (pi_v_cadena    IN OUT    VARCHAR2) 
+CREATE OR REPLACE PROCEDURE pr_cargar_fichero (pio_v_cadena    IN OUT    VARCHAR2) 
 IS  
     vv_cadena      VARCHAR2(100 CHAR);
     ex_nocadena    EXCEPTION;
     
 BEGIN
-    vv_cadena := NVL(TRIM(' ' FROM REPLACE(pi_v_cadena, '%', '|')), 'No hay cadena introducida'); -- Quita los espacios que hubiera al principio y final de palabra
+    vv_cadena := NVL(TRIM(' ' FROM REPLACE(pio_v_cadena, '%', '|')), 'No hay cadena introducida'); -- Quita los espacios que hubiera al principio y final de palabra
                                                                                                   -- Y sustituye los caracteres especiales % por separadores |
     
     IF vv_cadena = 'No hay cadena introducida' THEN -- Si no se introdujo cadena, se lanza un error
