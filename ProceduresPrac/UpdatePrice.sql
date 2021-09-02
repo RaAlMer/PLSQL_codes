@@ -17,6 +17,8 @@ INSERT INTO tb_productos
 INSERT INTO tb_productos 
     VALUES (3, 'Clavo', 300, 0.45, SYSDATE, TO_DATE('29/08/2021', 'DD/MM/YYYY'), 'Las Palmas');
 
--- Añade el campo porcentaje para conocer si ha aumentado el precio o disminuido
+-- Añade el campo activo y porcentaje para conocer si el producto ha vencido o si ha aumentado el precio o disminuido
 ALTER TABLE tb_productos
-ADD n_porcentaje NUMBER(4,2);
+ADD (b_activo     VARCHAR2(20 CHAR),
+     n_porcentaje NUMBER(4,2));
+
