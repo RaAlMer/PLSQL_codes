@@ -45,8 +45,8 @@ END pr_comprar_producto;
 
 -- Llamamos al procedimiento para aumentar el número de unidades de un producto (compra)
 DECLARE
-    vn_id           NUMBER := 1; --Introducimos el ID del producto del que queremos sustituir el precio
-    vn_unidades     NUMBER := 20; --Introducimos el nuevo precio
+    vn_id           NUMBER := 1; --Introducimos el ID del producto del que queremos comprar unidades
+    vn_unidades     NUMBER := 20; --Introducimos el número de unidades a comprar
 BEGIN
     pr_comprar_producto (vn_id, vn_unidades);
 END;
