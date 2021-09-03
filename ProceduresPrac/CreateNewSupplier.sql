@@ -39,11 +39,10 @@ BEGIN
             FROM tbproveedores
             WHERE v_desproveedor = vv_desproveedor;
             
-            RAISE ex_nomprovexiste; -- Si se lanza este error se saltará las dos líneas de más abajo
-                                    -- de INSERT INTO y VALUES, e irá a la excepción del bloque padre
+            RAISE ex_nomprovexiste; -- Si se lanza este error significa que ya hay proveedor con ese nombre
     
     EXCEPTION
-        WHEN NO_DATA_FOUND THEN
+        WHEN NO_DATA_FOUND THEN --Si no encuentra el dato en la selección, significa que no hay proveedor con ese nombre
             NULL;
     END;
     
