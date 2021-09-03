@@ -3,7 +3,7 @@ CREATE OR REPLACE PROCEDURE pr_comprar_producto (pi_n_idproducto           IN   
                                                  pio_n_unidades            IN OUT     TB_PRODUCTOS.N_PRECIOUD%TYPE) --Parámetro de entrada y salida - Unidades a sumar al producto
 IS  
     vn_idproducto   TB_PRODUCTOS.N_IDPRODUCTO%TYPE; --Variable para alamacenar el ID del producto
-    vn_unidades     TB_PRODUCTOS.N_UNIDADES%TYPE --Variable para almacenar el número de unidades antiguas
+    vn_unidades     TB_PRODUCTOS.N_UNIDADES%TYPE; --Variable para almacenar el número de unidades antiguas
     ex_sinid        EXCEPTION; --Excepción si no se introduce ID del producto
     ex_sinud        EXCEPTION; --Excepción si no se introducen las unidades del producto
     
@@ -21,7 +21,7 @@ BEGIN
         SELECT n_unidades --Consulta para introducir el número de unidades antiguo en su variable (vn_precioud)
          INTO vn_unidades
          FROM tb_productos
-         WHERE n_idproducto = vn_idproducto
+         WHERE n_idproducto = vn_idproducto;
     END;
     
     BEGIN
