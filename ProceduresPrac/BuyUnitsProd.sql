@@ -19,7 +19,7 @@ BEGIN
     
     BEGIN
         SELECT n_unidades --Consulta para introducir el número de unidades antiguo en su variable (vn_precioud)
-         INTO vn_unidades
+         INTO vn_unidades --Esto sería un cursor implícito
          FROM tb_productos
          WHERE n_idproducto = vn_idproducto;
     END;
