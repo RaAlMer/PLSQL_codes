@@ -41,3 +41,11 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('No se introdujo ID.'); --Error si no se introdujo ID
         
 END pr_vender_productos;
+
+-- Llamamos al procedimiento para disminuir el número de unidades de un producto (venta)
+DECLARE
+    vn_id           NUMBER := 1; --Introducimos el ID del producto del que queremos vender unidades
+    vn_unidades     NUMBER := 250; --Introducimos el número de unidades a vender
+BEGIN
+    pr_vender_productos (vn_id, vn_unidades);
+END;
