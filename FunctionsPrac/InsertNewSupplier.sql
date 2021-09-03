@@ -45,7 +45,7 @@ BEGIN
             RAISE ex_nomprovexiste; --If it exists, it raises an error
     
     EXCEPTION
-        WHEN NO_DATA_FOUND THEN -If it does not exist, it continue with the code
+        WHEN NO_DATA_FOUND THEN --If it does not exist, it continue with the code
             NULL;
     END;
     
