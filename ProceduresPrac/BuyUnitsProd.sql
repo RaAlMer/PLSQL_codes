@@ -25,7 +25,7 @@ BEGIN
     END;
     
     BEGIN
-        vn_unidades := vn_unidades + pio_n_unidades; --Actualizamos el valor de las unidades sumando las introducidad como parámetro
+        vn_unidades := vn_unidades + pio_n_unidades; --Actualizamos el valor de las unidades sumando las introducidas como parámetro
     END;
     
     BEGIN --Bloque para actualizar el valor de las unidades del producto en la tabla
