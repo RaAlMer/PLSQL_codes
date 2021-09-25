@@ -108,19 +108,19 @@ CREATE OR REPLACE PACKAGE BODY pk_gestion_ferreteria IS
         END;
         BEGIN
             vn_nuevoprecio := 1.05 * vn_precioud;
-            vn_porcentaje := (vn_nuevoprecio/vn_precioud)*100; --Cálculo del porcentaje entre precios nuevo y antiguo
+            vn_porcentaje := (vn_nuevoprecio/vn_precioud) * 100; --Cálculo del porcentaje entre precios nuevo y antiguo
         END;
         
         BEGIN
-            UPDATE tb_productos t --Consulta de actualización del precio nuevo donde estaba el antiguo
-             SET t.n_precioud = vn_nuevoprecio
-            WHERE t.n_idproducto = vn_idproducto;
+            UPDATE tb_productos --Consulta de actualización del precio nuevo donde estaba el antiguo
+             SET n_precioud = vn_nuevoprecio
+            WHERE n_idproducto = vn_idproducto;
         END;
         
         BEGIN
             UPDATE tb_productos --Consulta de actualización del porcentaje en su fila correspondiente
-                SET n_porcentaje = vn_porcentaje
-                WHERE n_idproducto = vn_idproducto;
+             SET n_porcentaje = vn_porcentaje
+            WHERE n_idproducto = vn_idproducto;
         END;
             
     END pr_actualizar_precios_proveedor;
@@ -130,7 +130,7 @@ CREATE OR REPLACE PACKAGE BODY pk_gestion_ferreteria IS
     BEGIN
         DELETE
          FROM tb_productos t
-         WHERE t.n_idproducto = (SELECT st.n_idproducto --Selecciona el ID del producto a borrar
+         WHERE t.n_idproducto IN (SELECT st.n_idproducto --Selecciona el ID del producto a borrar
                                  FROM tb_productos st
                                  WHERE st.b_activo = 'FALSE');
     
