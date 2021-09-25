@@ -158,3 +158,12 @@ CREATE OR REPLACE PACKAGE BODY pk_gestion_ferreteria IS
    
 END pk_gestion_ferreteria;
 
+DECLARE
+    vv_cadena    VARCHAR2(100 CHAR) := '  Destornillador |40|3.25|25/04/2021| |      '; -- La cadena del producto
+    vv_erroralta VARCHAR2(2000 CHAR); --Error message from the function
+BEGIN
+    pk_gestion_ferreteria.pr_generar_fichero_productos(vv_cadena, vv_erroralta);
+    pk_gestion_ferreteria.pr_actualizar_precios_proveedor;
+    pk_gestion_ferreteria.pr_borrar_productos_vencidos;
+    pk_gestion_ferreteria.pr_list_products;
+END;
