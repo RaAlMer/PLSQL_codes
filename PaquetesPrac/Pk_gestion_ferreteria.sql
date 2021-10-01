@@ -1,4 +1,4 @@
--- Package 
+-- Package to generate a product from a file, update the price of the product that was inserted before the new one, delete expired products and list the rest of them
 CREATE OR REPLACE PACKAGE pk_gestion_ferreteria IS
     PROCEDURE pr_generar_fichero_productos (pi_v_cadena IN VARCHAR2, po_v_error OUT VARCHAR2);
     PROCEDURE pr_actualizar_precios_proveedor;
@@ -6,10 +6,10 @@ CREATE OR REPLACE PACKAGE pk_gestion_ferreteria IS
     PROCEDURE pr_list_products;
 END pk_gestion_ferreteria;
 
--- Hay que declarar las funciones y procedimientos que se usen en el paquete en el bloque superior
+-- Functions and procedures must be declared before in the package's above block
 CREATE OR REPLACE PACKAGE BODY pk_gestion_ferreteria IS
 
-    -- Procedimiento que genera los productos registrados en una cadena
+    -- Procedure to generate the products registered in an array
     PROCEDURE pr_generar_fichero_productos (pi_v_cadena   IN  VARCHAR2,
                                             po_v_error    OUT VARCHAR2)
     IS  
@@ -63,55 +63,57 @@ CREATE OR REPLACE PACKAGE BODY pk_gestion_ferreteria IS
         
     END pr_generar_fichero_productos;
     
-    -- Procedimiento para actualizar los precios
+    -- Procedure to update prices
     PROCEDURE pr_actualizar_precios_proveedor
     IS  
-        vn_idproducto   TB_PRODUCTOS.N_IDPRODUCTO%TYPE; --Variable para guardar el ID del producto
-        vn_precioud     TB_PRODUCTOS.N_PRECIOUD%TYPE;   --Variable para guardar el antiguo precio
-        vn_nuevoprecio  TB_PRODUCTOS.N_PRECIOUD%TYPE;
-        vn_porcentaje   TB_PRODUCTOS.N_PORCENTAJE%TYPE; --Variable para guardar el porcentaje
+        vn_idproducto   TB_PRODUCTOS.N_IDPRODUCTO%TYPE; --Variable to save the product's ID
+        vn_precioud     TB_PRODUCTOS.N_PRECIOUD%TYPE;   --Variable to save the old price
+        vn_nuevoprecio  TB_PRODUCTOS.N_PRECIOUD%TYPE;   --Variable to save the new price
+        vn_porcentaje   TB_PRODUCTOS.N_PORCENTAJE%TYPE; --Variable to save the percentage of change in the product's price
         
     BEGIN
-        SELECT MAX(n_idproducto) - 1
+        SELECT MAX(n_idproducto) - 1 -- It will update the price of the product added before the new one
                 INTO vn_idproducto    
                 FROM tb_productos;
                 
         BEGIN
-            SELECT n_precioud --Consulta para introducir el precio antiguo en su variable (vn_precioud)
+            SELECT n_precioud -- Query to insert the old price into its variable (vn_precioud)
              INTO vn_precioud
              FROM tb_productos
              WHERE n_idproducto = vn_idproducto;
         END;
         BEGIN
-            vn_nuevoprecio := 1.05 * vn_precioud;
-            vn_porcentaje := (vn_nuevoprecio/vn_precioud) * 100; --Cálculo del porcentaje entre precios nuevo y antiguo
+            vn_nuevoprecio := 1.05 * vn_precioud; -- New product's price increased a 5%
+            vn_porcentaje := (vn_nuevoprecio/vn_precioud) * 100; -- Percentage of change in prices
         END;
         
         BEGIN
-            UPDATE tb_productos --Consulta de actualización del precio nuevo donde estaba el antiguo
+            UPDATE tb_productos -- Query to update the new price
              SET n_precioud = vn_nuevoprecio
             WHERE n_idproducto = vn_idproducto;
         END;
         
         BEGIN
-            UPDATE tb_productos --Consulta de actualización del porcentaje en su fila correspondiente
+            UPDATE tb_productos -- Query to add the percentage into the table
              SET n_porcentaje = vn_porcentaje
             WHERE n_idproducto = vn_idproducto;
         END;
             
     END pr_actualizar_precios_proveedor;
     
+    -- Procedure to delete the expired products
     PROCEDURE pr_borrar_productos_vencidos
     IS  
     BEGIN
         DELETE
          FROM tb_productos t
-         WHERE t.n_idproducto IN (SELECT st.n_idproducto --Selecciona el ID del producto a borrar
+         WHERE t.n_idproducto IN (SELECT st.n_idproducto -- Selects the ID of the products to be deleted
                                  FROM tb_productos st
                                  WHERE st.b_activo = 'FALSE');
     
     END pr_borrar_productos_vencidos;
     
+    -- Procedure to list the products of the product's table
     PROCEDURE pr_list_products IS 
         CURSOR c_products IS 
             SELECT n_idproducto, v_desproducto, n_unidades, n_precioud, d_fechaalta, d_fechavenc, v_localidad, b_activo
@@ -134,8 +136,9 @@ CREATE OR REPLACE PACKAGE BODY pk_gestion_ferreteria IS
    
 END pk_gestion_ferreteria;
 
+-- Test of the package
 DECLARE
-    vv_cadena    VARCHAR2(100 CHAR) := '  Tuerca |100|0.01|23/11/2021| |      '; -- La cadena del producto
+    vv_cadena    VARCHAR2(100 CHAR) := '  Tuerca |100|0.01|23/11/2021| |      '; -- Array containing the new product
     vv_erroralta VARCHAR2(2000 CHAR); --Error message from the function
 BEGIN
     pk_gestion_ferreteria.pr_generar_fichero_productos(vv_cadena, vv_erroralta);
