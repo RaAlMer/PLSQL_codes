@@ -135,7 +135,7 @@ CREATE OR REPLACE PACKAGE BODY pk_gestion_ferreteria IS
 END pk_gestion_ferreteria;
 
 DECLARE
-    vv_cadena    VARCHAR2(100 CHAR) := '  Elisaurio |100|5.17|23/11/2021| |      '; -- La cadena del producto
+    vv_cadena    VARCHAR2(100 CHAR) := '  Tuerca |100|0.01|23/11/2021| |      '; -- La cadena del producto
     vv_erroralta VARCHAR2(2000 CHAR); --Error message from the function
 BEGIN
     pk_gestion_ferreteria.pr_generar_fichero_productos(vv_cadena, vv_erroralta);
