@@ -1,18 +1,3 @@
--- Suppliers' table
-CREATE TABLE tbproveedores
-(
-    n_idproveedor   NUMBER(3),
-    v_desproveedor  VARCHAR2(50 CHAR),
-    d_fechaalta     DATE
-);
-
-INSERT INTO tbproveedores
-    VALUES (1, 'Martillos La Forja', TO_DATE('19/04/2021', 'DD/MM/YYYY'));
-INSERT INTO tbproveedores 
-    VALUES (2, 'Materiales El Bueno', TO_DATE('01/05/2021', 'DD/MM/YYYY'));
-INSERT INTO tbproveedores 
-    VALUES (3, 'Almacenes Los Mejores', TO_DATE('07/05/2021', 'DD/MM/YYYY'));
-
 --Function to insert a new supplier in our table
 CREATE OR REPLACE FUNCTION fn_alta_proveedor (po_n_idproveedor  OUT     TBPROVEEDORES.N_IDPROVEEDOR%TYPE, --Out parameter - Supplier's ID
                                               pi_v_desproveedor IN      TBPROVEEDORES.V_DESPROVEEDOR%TYPE,  --In parameter - Supplier's name
