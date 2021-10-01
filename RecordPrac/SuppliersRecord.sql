@@ -10,9 +10,9 @@ DECLARE
 
 BEGIN
 	SELECT *
-	 INTO vr_proveedores
-	 FROM tbproveedores
-	WHERE n_idproveedor = 1;
+	  INTO vr_proveedores
+	  FROM tbproveedores
+	 WHERE n_idproveedor = 1;
 
 	DBMS_OUTPUT.PUT_LINE('El ID del proveedor es ' || vr_proveedores.n_idproveedor);
 	DBMS_OUTPUT.PUT_LINE('El nombre del proveedor es ' || vr_proveedores.v_desproveedor);
