@@ -1,25 +1,3 @@
--- Procedimiento que actualiza si los productos están vencidos o no
-CREATE OR REPLACE PROCEDURE pr_actualizar_estado
-
-IS
-    
-BEGIN
-    UPDATE tb_productos t
-    SET t.b_activo = 
-        (SELECT
-            CASE WHEN SYSDATE > st.d_fechavenc THEN 'FALSE' ELSE 'TRUE' END -- Devuelve TRUE si el producto sigue activo y FALSE si está vencido
-            FROM tb_productos st
-            WHERE st.n_idproducto = t.n_idproducto);
-
-END pr_actualizar_estado;
-/
-
--- Llamamos al procedimiento
-BEGIN
-    pr_actualizar_estado;
-END;
-/
-
 -- Procedimiento para actualizar los precios
 CREATE OR REPLACE PROCEDURE pr_actualizar_precios_proveedor (pi_n_idproducto           IN         TB_PRODUCTOS.N_IDPRODUCTO%TYPE, --Se introduce el ID del producto
                                                              pio_n_precioud            IN OUT     TB_PRODUCTOS.N_PRECIOUD%TYPE,   --Se introduce el nuevo precio
