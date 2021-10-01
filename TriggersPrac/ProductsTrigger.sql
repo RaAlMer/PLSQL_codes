@@ -25,7 +25,7 @@ CREATE TABLE tb_logproductos
 
 -- Trigger that gets any change in porducts' table to the log table
 CREATE OR REPLACE TRIGGER tr_log_productos
-AFTER INSERT OR UPDATE OR DELETE ON tb_logproductos
+AFTER INSERT OR UPDATE OR DELETE ON tb_productos
 FOR EACH ROW
 DECLARE
     vv_accion VARCHAR2(10 CHAR); --Variable to save the action taken in the suppliers' table
