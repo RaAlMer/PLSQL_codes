@@ -15,6 +15,10 @@ CREATE TABLE tb_logproductos
     d_fechavencnew    DATE,
     v_localidadold    VARCHAR2(20 CHAR),
     v_localidadnew    VARCHAR2(20 CHAR),
+    b_activoold       VARCHAR2(20 CHAR),
+    b_activonew       VARCHAR2(20 CHAR),
+    n_porcentajeold   NUMBER(10,2),
+    n_porcentajenew   NUMBER(10,2),
     d_fecharegistro   DATE,
     v_accion          VARCHAR2(10 CHAR)
 );
@@ -39,6 +43,8 @@ BEGIN
                                    d_fechaaltaold, d_fechaaltanew,
                                    d_fechavencold, d_fechavencnew,
                                    v_localidadold, v_localidadnew,
+                                   b_activoold, b_activonew,
+                                   n_porcentajeold, n_porcentajenew,
                                    d_fecharegistro, v_accion)
         VALUES (:OLD.n_idproducto, :NEW.n_idproducto,
                 :OLD.v_desproducto, :NEW.v_desproducto,
@@ -47,6 +53,8 @@ BEGIN
                 :OLD.d_fechaalta, :NEW.d_fechaalta,
                 :OLD.d_fechavenc, :NEW.d_fechavenc,
                 :OLD.v_localidad, :NEW.v_localidad,
+                :OLD.b_activo, :NEW.b_activo,
+                :OLD.n_porcentaje, :NEW.n_porcentaje,
                 SYSDATE, vv_accion);
  
 END tr_log_productos;
