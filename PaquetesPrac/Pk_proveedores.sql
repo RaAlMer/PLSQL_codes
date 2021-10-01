@@ -1,18 +1,3 @@
--- Tabla proveedores
-CREATE TABLE tbproveedores
-(
-    n_idproveedor   NUMBER(3),
-    v_desproveedor  VARCHAR2(50 CHAR),
-    d_fechaalta     DATE
-);
-
-INSERT INTO tbproveedores
-    VALUES (1, 'Martillos La Forja', TO_DATE('19/04/2021', 'DD/MM/YYYY'));
-INSERT INTO tbproveedores 
-    VALUES (2, 'Materiales El Bueno', TO_DATE('01/05/2021', 'DD/MM/YYYY'));
-INSERT INTO tbproveedores 
-    VALUES (3, 'Almacenes Los Mejores', TO_DATE('07/05/2021', 'DD/MM/YYYY'));
-
 -- Paquete con una función y un procedimiento (que llama a esta función) para que nos de el nombre de un proveedor según su número de identificación (id)
 CREATE OR REPLACE PACKAGE pk_proveedores IS
     FUNCTION fn_nombre_proveedor (pi_n_idproveedor TBPROVEEDORES.N_IDPROVEEDOR%TYPE)
