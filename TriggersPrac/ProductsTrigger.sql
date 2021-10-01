@@ -36,7 +36,7 @@ BEGIN
         WHEN DELETING THEN vv_accion := 'DELETE';  --Action: delete
     END CASE;
     
-    INSERT INTO tb_logproveedores (n_idproductoold, n_idproductonew, -- Insert the old and new records after a change is made in the suppliers' table
+    INSERT INTO tb_logproductos (n_idproductoold, n_idproductonew, -- Insert the old and new records after a change is made in the suppliers' table
                                    v_desproductoold, v_desproductonew,
                                    n_unidadesold, n_unidadesnew,
                                    n_precioudold, n_precioudnew,
