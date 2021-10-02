@@ -22,7 +22,7 @@ CREATE OR REPLACE PROCEDURE pr_lista_productos
 IS
 
     TYPE ttab_ty_nombre IS TABLE OF TB_PRODUCTOS%ROWTYPE; -- Collection of records
-	  vttab_ty_nombre ttab_ty_nombre;
+    vttab_ty_nombre ttab_ty_nombre;
 
 BEGIN
 
