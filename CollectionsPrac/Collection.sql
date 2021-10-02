@@ -68,3 +68,5 @@ BEGIN
     END IF;
     
 END;
+
+-- BLOQUES ASOCIATIVOS
