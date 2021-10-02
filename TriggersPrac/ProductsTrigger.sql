@@ -1,4 +1,4 @@
--- Log table to track any changes in suppliers table
+-- Log table to track any changes in products' table
 CREATE TABLE tb_logproductos
 (
     n_idproductoold   NUMBER(3),
@@ -23,12 +23,12 @@ CREATE TABLE tb_logproductos
     v_accion          VARCHAR2(10 CHAR)
 );
 
--- Trigger that gets any change in porducts' table to the log table
+-- Trigger that gets any change in products' table to the log table
 CREATE OR REPLACE TRIGGER tr_log_productos
 AFTER INSERT OR UPDATE OR DELETE ON tb_productos
 FOR EACH ROW
 DECLARE
-    vv_accion VARCHAR2(10 CHAR); --Variable to save the action taken in the suppliers' table
+    vv_accion VARCHAR2(10 CHAR); --Variable to save the action taken in the products' table
 BEGIN
     CASE
         WHEN INSERTING THEN vv_accion := 'INSERT'; --Action: insert
@@ -36,7 +36,7 @@ BEGIN
         WHEN DELETING THEN vv_accion := 'DELETE';  --Action: delete
     END CASE;
     
-    INSERT INTO tb_logproductos (n_idproductoold, n_idproductonew, -- Insert the old and new records after a change is made in the suppliers' table
+    INSERT INTO tb_logproductos (n_idproductoold, n_idproductonew, -- Insert the old and new records after a change is made in the products' table
                                    v_desproductoold, v_desproductonew,
                                    n_unidadesold, n_unidadesnew,
                                    n_precioudold, n_precioudnew,
