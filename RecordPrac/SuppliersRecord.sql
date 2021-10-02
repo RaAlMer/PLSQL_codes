@@ -1,3 +1,4 @@
+-- Record to insert three types into a new type called t_registro
 DECLARE
 	TYPE t_registro IS RECORD(
 		v_producto  VARCHAR2(20),
@@ -6,10 +7,10 @@ DECLARE
 
 	vtr_producto t_registro;
 
-	vr_proveedores tbproveedores%ROWTYPE;
+	vr_proveedores tbproveedores%ROWTYPE; -- Variable with three fields from the suppliers' table
 
 BEGIN
-	SELECT *
+	SELECT * -- Inserting the supplier with ID = 1 into the variable created before
 	  INTO vr_proveedores
 	  FROM tbproveedores
 	 WHERE n_idproveedor = 1;
