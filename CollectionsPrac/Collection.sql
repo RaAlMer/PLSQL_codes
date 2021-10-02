@@ -70,3 +70,33 @@ BEGIN
 END;
 
 -- BLOQUES ASOCIATIVOS
+DECLARE
+    -- Creamos el tipo
+    TYPE ttab_ty_nombre IS TABLE OF VARCHAR2(20 CHAR) INDEX BY VARCHAR2(2);
+    -- Declaramos una variable del tipo creado
+    vttab_ty_nombre ttab_ty_nombre;
+    
+    v_indice VARCHAR2(2);
+    
+BEGIN
+    
+    DBMS_OUTPUT.PUT_LINE('El número de registros en el vector es: ' || vttab_ty_nombre.COUNT);
+    
+    vttab_ty_nombre('ES') := 'España';
+    vttab_ty_nombre('AR') := 'Argentina';
+    vttab_ty_nombre('ME') := 'Mexico';
+    vttab_ty_nombre('CO') := 'Colombia';
+    
+    v_indice := vttab_ty_nombre.FIRST;
+    DBMS_OUTPUT.PUT_LINE('El indice del registro es: ' || v_indice);
+    
+    WHILE v_indice IS NOT NULL LOOP
+        DBMS_OUTPUT.PUT_LINE('El ID es ' || v_indice || ' y su valor es: ' || vttab_ty_nombre(v_indice));
+        v_indice := vttab_ty_nombre.NEXT(v_indice);
+    END LOOP;
+    
+    DBMS_OUTPUT.PUT_LINE('Acceso directo: El ID es ES y su valor es: ' || vttab_ty_nombre('ES'));
+    
+    DBMS_OUTPUT.PUT_LINE('El número de registros en el vector es: ' || vttab_ty_nombre.COUNT);
+    
+END;
